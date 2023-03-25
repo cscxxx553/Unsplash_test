@@ -47,6 +47,7 @@ const PhotoComp = ({ photo }) => {
 //頁面載入時馬上搜尋cat並顯示在頁面上
 useEffect(() => {
   // getPhotos()
+  const timer = setTimeout(() => {
   api.search
   .getPhotos({ query: "cat", stats: true, orientation: "landscape", perPage: 10 })
   .then(result => {
@@ -54,7 +55,9 @@ useEffect(() => {
   })
   .catch(() => {
     console.log("something went wrong!");
-  });
+  })
+  }, 500)
+  return () => clearTimeout(timer)
 }, []);
 
 
