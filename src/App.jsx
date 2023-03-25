@@ -12,12 +12,19 @@ const [inputText, setInputText] = useState('cat')
 
 const [data, setPhotosResponse] = useState(null)
 
+// const Access_Key = import.meta.env.VITE_API_KEY
+
 //利用unsplash-js和access key製作api
 const api = createApi({
   // Don't forget to set your access token here!
   // See https://unsplash.com/developers
-  accessKey: "Xu5_Tajs73tZCnaSASdJFO9FW4-6U9uHAkXLa9QP4aE"
+  accessKey: import.meta.env.VITE_API_KEY
 });
+
+// const getPhotos = async () => {
+//   const res = await axios.get(`https://api.umsplash.com/search/photos?query=dog&client_id=${Access_Key}`)
+//   console.log('res', res)
+// }
 
 //頁面載入時馬上搜尋cat並顯示在頁面上
 const PhotoComp = ({ photo }) => {
@@ -39,6 +46,7 @@ const PhotoComp = ({ photo }) => {
 
 //頁面載入時馬上搜尋cat並顯示在頁面上
 useEffect(() => {
+  // getPhotos()
   api.search
   .getPhotos({ query: "cat", stats: true, orientation: "landscape", perPage: 10 })
   .then(result => {
